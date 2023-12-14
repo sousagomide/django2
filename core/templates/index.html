@@ -1,10 +1,60 @@
+{% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
         <title>Index</title>
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" integrity="sha512-U/gkPvaqpUI9k7UC1ivfLUO+hb1dPzQyWskzeYoDjZENrWvLVZ40mg510RvWsVP3YcuKW4lAkfxgU9khbNhTrg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" integrity="sha512-nvJNGNsQy69Ogs4KBn+nu1x42OzCTxjOIKL3S2H9BYqUQImQ5hfDMcbh71l/6O0oRjTVUAlTLFZJA8gvWrJnmQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" integrity="sha512-c8EiZsFDfLKFgHdF6gPX3UTAszlpUXOkJS05I3856M0lAnBLcK8YA8T+ldhjIFUoJ6knJlkwJ1V1laspkoBeqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet"/>
     </head>
     <body>
-        <h1>Index</h1>
+        <div class="container">
+            <h1>Produtos</h1>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Estoque</th>
+                        <th scope="col">#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                        <tr>
+                            <td scope="row">{{ produto.id }}</td>
+                            <td scope="row">{{ produto.nome }}</td>
+                            <td scope="row">{{ produto.preco }}</td>
+                            <td scope="row">{{ produto.estoque }}</td>
+                            <td scope="row">
+                                <a href="#modal{{produto.id}}" data-toggle="modal" >
+                                    <i class="fa fa-regular fa-image fa-2x"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <div class="modal fade bd-example-modal-lg show" id="modal{{produto.id}}" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="dynamic-content">
+                                        <img src="{{ produto.imagem.url }}" class="img-fluid" alt="{{ produto.nome }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% bootstrap_javascript jquery="full" %}
     </body>
 </html>
