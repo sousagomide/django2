@@ -17,8 +17,8 @@ class ContatoForm(forms.Form):
         mail = EmailMessage(
             subject='E-mail enviado pelo sistema django2',
             body=conteudo,
-            from_email='contato@seudominio.com.br',
-            to=['contato@seudominio.com.br'],
+            from_email='rodrigo.gomide@ifgoiano.edu.br',
+            to=['rodrigo.gomide@ifgoiano.edu.br'],
             headers={'Reply-To': email}
         )
         mail.send()
